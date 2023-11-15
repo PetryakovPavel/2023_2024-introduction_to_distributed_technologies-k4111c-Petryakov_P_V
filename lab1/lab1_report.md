@@ -32,28 +32,26 @@ Lab: Lab1
 minikube version
 ```
 ![version](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/версия%20миникуба.png)
+
+
 Развернем minikube cluster с помощью команды minikube start:
 ```bash
 minikube start
 ```
 ![start](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/запуск%20миникуба.png)
 
+
 Далее выполняются команды, которые добавляют на нашей локальной машине в список образов образ нужного ПО - Vault.
 ```bash
 docker pull vault:1.13.3
 docker images
 ```
-Теперь посмотрим список образов с помощью следующих команд:
-```bash
-#просмотреть в minikube список всех образов
-minikube image ls
-```
-![images](images.png)
+![pull](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/добавление%20образа.png)
 
-В конце мы видим, что есть нужный нам образ vault:1.13.3
+
 
 ### 3. Написание манифеста для развертывания "пода" HashiCorp Vault
-Следующим шагом было написание манифеста для развертывания "пода" (наименьший объект рабочей нагрузки)  HashiCorp Vault, и при этом прокинуть внутрь порт 8200.
+Теперь мы пишем  манифест для развертывания "пода"  HashiCorp Vault в Visual Studio Code.
 Манифест (vault.yaml) прилагается в папке lab1.
 Манифест составлялся в соответствии с object model Kubernetes.
 Обязательные поля:
@@ -62,24 +60,32 @@ minikube image ls
 - `metadata` - метаданные;
 - `spec` - конфигурация объекта;
 
+![pod](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/манифест.png)
+
 ### 4. Создание пода Vault и получение доступа к контейнеру
 Далее запускается описанный под с помощью команды:
 ```bash
 minikube kubectl -- apply -f vault.yaml
 ```
-![launch](launch.png)
+![apply](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/создание%20пода.png)
 
-Далее необходимо создать сервис для доступа к этому контейнеру, воспользуемся простым способом, с помощью команды:
+Далее необходимо создать сервис для доступа к этому контейнеру, воспользуемся  командой:
 ```bash
 minikube kubectl -- expose pod vault --type=NodePort --port=8200
 ```
+![service](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/сервис.png)
+
+
 Сервис создался, далее нужно попасть в контейнер с помощью команды `kubectl port-forward`:
 ```bash
 minikube kubectl -- port-forward service/vault 8200:8200
 ```
+![start](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/запущенный%20сайт.png)
+
+
 Данная команда перенаправляет трафик с клиентского устройства по указанному порту (`8200`) на указанный порт (`8200`) сервиса пода vault (`service/vault`).
 Minikube прокинул порт нашего компьютера в контейнер и теперь можем зайти в vault по ссылке http://localhost:8200
-![vault](entry.png)
+![vault](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/сайт.png)
 
 ### 5. Найти сгенерированный корневой токен, чтобы получить доступ к Vault
 Теперь необходимо войти в наш vault ипользуя токен, который нам необходимо НАЙТИ, а не сгенерировать.
@@ -87,11 +93,14 @@ Minikube прокинул порт нашего компьютера в конт
 ```bash
 minikube kubectl logs vault
 ```
-![token](token.png)
+![token](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/логи.png)
+
+![tocken](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/токен.png)
+
 
 Копируем данные Root Token и используем для входа в наш vault:
 
-![entry](entry.png)
+![entry](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/Sait.png)
 
 Ответы на вопросы:
 1. Что сейчас произошло и что сделали команды ранее?
@@ -102,6 +111,6 @@ minikube kubectl logs vault
 
 
 Схема организации контейеров и сервисов 
-![diagram](diagram.png)
+![diagram](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/Диаграмма%20.png)
 
 
