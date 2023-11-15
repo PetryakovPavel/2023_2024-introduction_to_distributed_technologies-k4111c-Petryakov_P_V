@@ -41,7 +41,7 @@ minikube start
 ![start](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/запуск%20миникуба.png)
 
 
-Далее выполняются команды, которые добавляют на нашей локальной машине в список образов образ нужного ПО - Vault.
+Дальше выполним  команды, которые добавляют на нашей локальной машине в список образов образ нужного ПО - Vault.
 ```bash
 docker pull vault:1.13.3
 docker images
@@ -53,8 +53,8 @@ docker images
 ### 3. Написание манифеста для развертывания "пода" HashiCorp Vault
 Теперь мы пишем  манифест для развертывания "пода"  HashiCorp Vault в Visual Studio Code.
 Манифест (vault.yaml) прилагается в папке lab1.
-Манифест составлялся в соответствии с object model Kubernetes.
-Обязательные поля:
+
+Обязательные поля для манифеста:
 - `apiVersion` - используемая версия API;
 - `kind` - тип описываемого объекта;
 - `metadata` - метаданные;
@@ -63,13 +63,13 @@ docker images
 ![pod](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/манифест.png)
 
 ### 4. Создание пода Vault и получение доступа к контейнеру
-Далее запускается описанный под с помощью команды:
+Теперь запустим написанный нами под с помощью команды:
 ```bash
 minikube kubectl -- apply -f vault.yaml
 ```
 ![apply](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/создание%20пода.png)
 
-Далее необходимо создать сервис для доступа к этому контейнеру, воспользуемся  командой:
+Далее необходимо создать сервис для доступа к этому контейнеру, для этого мы  воспользуемся  командой:
 ```bash
 minikube kubectl -- expose pod vault --type=NodePort --port=8200
 ```
@@ -84,16 +84,20 @@ minikube kubectl -- port-forward service/vault 8200:8200
 
 
 Данная команда перенаправляет трафик с клиентского устройства по указанному порту (`8200`) на указанный порт (`8200`) сервиса пода vault (`service/vault`).
-Minikube прокинул порт нашего компьютера в контейнер и теперь можем зайти в vault по ссылке http://localhost:8200
+Minikube прокинул порт нашего компьютера в контейнер и теперь мы можем зайти в vault по ссылке http://localhost:8200
+
 ![vault](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/сайт.png)
 
 ### 5. Найти сгенерированный корневой токен, чтобы получить доступ к Vault
-Теперь необходимо войти в наш vault ипользуя токен, который нам необходимо НАЙТИ, а не сгенерировать.
-Для поиска токена, необходимого для входа воспользуемся `kubectl logs`, который используется для получения логов из контейнера в указанном поде:
+Теперь необходимо войти в наш vault используя токен, который нам необходимо найти, а не сгенерировать.
+Для поиска токена, необходимого для входа воспользуемся командой `kubectl logs`, которая позволяет нам получить логи из контейнера в указанном поде:
+
 ```bash
 minikube kubectl logs vault
 ```
 ![token](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/логи.png)
+
+Вот необходимый нам токен
 
 ![tocken](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/токен.png)
 
@@ -104,10 +108,9 @@ minikube kubectl logs vault
 
 Ответы на вопросы:
 1. Что сейчас произошло и что сделали команды ранее?
-Изначально развернули кластер. Далее по написанному манифесту, в нем развернут "под" с контейнером, запущенным из образа vault и развернут 1 сервис для подключения к приложению
-
+ Мы развернули кластер minikube, загрузили для docker образ Vault. Написали манифест и развернули Pod с контейнером,запущенным из образа vault и развернули 1 сервис для подключения к приложению.   
 2. Где взять токен для входа в Vault?
-Как было сказано раннее, в логах "пода"
+Для входа в Vault необходимо зайти в логи  и найти в них токен.
 
 
 Схема организации контейеров и сервисов 
