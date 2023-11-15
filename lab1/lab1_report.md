@@ -31,6 +31,7 @@ Lab: Lab1
 ```bash
 minikube version
 ```
+![version](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/версия%20миникуба.png)
 Развернем minikube cluster с помощью команды minikube start:
 ```bash
 minikube start
