@@ -36,7 +36,7 @@ minikube version
 ```bash
 minikube start
 ```
-![версия миникуба](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/версия%20миникуба.png)
+![start](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab1/picture/запуск%20миникуба.png)
 
 Далее выполняются команды, которые добавляют на нашей локальной машине в список образов образ нужного ПО - Vault.
 ```bash
