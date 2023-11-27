@@ -5,8 +5,11 @@ Course: [Introduction to distributed technologies](https://github.com/itmo-ict-f
 Year: 2023/2024
 Group: K4111с
 Author: Petryakov Pavel
+
 Lab: Lab2
+
 Date of create:
+
 Date of finished:
 
 
