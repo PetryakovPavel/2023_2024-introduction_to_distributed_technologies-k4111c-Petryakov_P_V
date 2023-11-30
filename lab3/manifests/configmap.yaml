@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend
+data:
+  REACT_APP_USERNAME: Petryakov Pavel
+  REACT_APP_COMPANY_NAME: ITMO
