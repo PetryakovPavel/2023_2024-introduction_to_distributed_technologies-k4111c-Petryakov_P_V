@@ -69,15 +69,16 @@ TLS – Transport Layer Security.
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=petryakov.itmo"
 ```
 
-![]()https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab3/picture/Снимок%20экрана%20от%202023-11-30%2014-35-52.png)
+![](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab3/picture/Снимок%20экрана%20от%202023-11-30%2014-35-52.png)
 
 
 Secret содержит небольшое количество конфиденциальных данных, таких как пароль, токен или ключ.
 ```
 kubectl create secret tls tls-secret --cert=tls.crt --key=tls.key
 ```
+![](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab3/picture/Создание%20секрет.png)
 
-Проверяем, создалось ли:
+Проверяем:
 ```
 kubectl get secret
 ```
