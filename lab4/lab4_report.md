@@ -130,6 +130,7 @@ Deployment
 ![](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab4/picture/ДеплойментМ.png)
 
 Service
+
 ![](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab4/picture/СервисМ.png)
 
 Далее выполняется команда:
