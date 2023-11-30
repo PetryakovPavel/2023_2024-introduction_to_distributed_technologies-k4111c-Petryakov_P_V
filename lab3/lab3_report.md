@@ -96,6 +96,7 @@ minikube addons enable ingress
 ![](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab3/picture/Ингресс%20старт.png)
 
 Теперь создаем манифест Ingress.
+
 ![](https://github.com/PetryakovPavel/2023_2024-introduction_to_distributed_technologies-k4111c-Petryakov_P_V/blob/main/lab3/picture/Ингрес.png)
 
 деплоим манифест
